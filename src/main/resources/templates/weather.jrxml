@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="weather1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a5cabdc6-e333-460f-a2be-42a06fcd7272">
+	<parameter name="CITY" class="java.lang.String"/>
+	<parameter name="COUNTRY" class="java.lang.String"/>
+	<parameter name="WEATHER" class="java.lang.String"/>
+	<parameter name="ICON" class="java.lang.String"/>
+	<parameter name="TEMPERATURE" class="java.lang.String"/>
+	<parameter name="TEMPERATURE_UNIT" class="java.lang.String"/>
+	<parameter name="COORDINATES" class="java.lang.String"/>
+	<parameter name="ZONE_OFFSET" class="java.lang.String"/>
+	<parameter name="WIND_DIRECTION" class="java.lang.String"/>
+	<parameter name="WIND_SPEED" class="java.lang.String"/>
+	<parameter name="WIND_GUST" class="java.lang.String"/>
+	<parameter name="WIND_UNIT" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="150" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="-20" width="595" height="170" backcolor="#3A5B8C" uuid="29d6fc0a-5387-4072-89a4-572bd1f2c96d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="95" width="390" height="25" forecolor="#FFFFFF" uuid="7d85ebf2-cbed-4444-bb07-4552bdcf3c95">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="120" width="280" height="20" forecolor="#FFFFFF" uuid="8385b2ab-6094-4901-b6f7-843e250ab0a1"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COUNTRY}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="-5" width="100" height="100" uuid="05544ca0-1ccc-43d0-b0ea-bb25c0efe14a"/>
+				<imageExpression><![CDATA[$P{ICON}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="110" y="65" width="440" height="20" forecolor="#FFFFFF" uuid="58bf2e61-0488-4015-a588-f0715576d123"/>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{WEATHER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="20" width="100" height="40" forecolor="#FFFFFF" uuid="b83c04e9-5a47-472c-aaea-e847e23cc78c"/>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="30"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TEMPERATURE} + $P{TEMPERATURE_UNIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="100" height="20" forecolor="#FFFFFF" uuid="6c374aff-253f-41fa-8ea1-ece72605a7f4"/>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Сейчас"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="120" width="280" height="20" forecolor="#FFFFFF" uuid="4d35c655-8f70-4549-a5a7-398fd37ef366"/>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Координаты: " + $P{COORDINATES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="100" width="160" height="20" forecolor="#FFFFFF" uuid="f16ffcc2-9f6e-47b6-8490-5c72daf9142f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["UTC Смещение: " + $P{ZONE_OFFSET}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="20" width="45" height="20" forecolor="#FFFFFF" uuid="11356cc4-6829-4540-88cc-cb5391caa275"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ветер:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="130" height="20" forecolor="#FFFFFF" uuid="1e06ef94-52d4-4b4b-b961-c6c22a77efdc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{WIND_DIRECTION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="20" width="130" height="20" forecolor="#FFFFFF" uuid="4d3e421b-d1c1-4fec-b4a5-7774d7efaf18">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{WIND_SPEED} + " " + $P{WIND_UNIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="40" width="130" height="20" forecolor="#FFFFFF" uuid="9bc09a71-cb82-452f-8538-ec020730b197">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Порывы до: " + $P{WIND_GUST} + " " + $P{WIND_UNIT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

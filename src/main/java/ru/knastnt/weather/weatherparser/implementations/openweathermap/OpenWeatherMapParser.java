@@ -4,6 +4,7 @@ import com.github.prominence.openweathermap.api.OpenWeatherMapClient;
 import com.github.prominence.openweathermap.api.enums.Language;
 import com.github.prominence.openweathermap.api.enums.UnitSystem;
 import com.github.prominence.openweathermap.api.model.forecast.Forecast;
+import com.github.prominence.openweathermap.api.model.weather.Weather;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +25,15 @@ public class OpenWeatherMapParser implements WeatherParser {
     public WeatherDto parseForCity(String city) {
         OpenWeatherMapClient openWeatherClient = new OpenWeatherMapClient(apiKey);
 
-        final Forecast forecast = openWeatherClient
+        Weather weather = openWeatherClient
+                .currentWeather()
+                .single()
+                .byCityName(city)
+                .language(Language.RUSSIAN)
+                .unitSystem(UnitSystem.METRIC)
+                .retrieve()
+                .asJava();
+        Forecast forecast = openWeatherClient
                 .forecast5Day3HourStep()
                 .byCityName(city)
                 .language(Language.RUSSIAN)
@@ -33,6 +42,6 @@ public class OpenWeatherMapParser implements WeatherParser {
                 .retrieve()
                 .asJava();
 
-        return mapper.map(forecast);
+        return mapper.map(weather, forecast);
     }
 }
