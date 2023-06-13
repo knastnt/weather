@@ -11,6 +11,7 @@ public class PdfDocumentCreationService implements DocumentCreationService {
     public byte[] createWeatherDocument(WeatherDto weather) {
         log.debug("Create weather document for: {}", weather);
 
+        //todo
         return new byte[0];
     }
 }

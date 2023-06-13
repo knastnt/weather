@@ -1,5 +1,5 @@
 package ru.knastnt.weather.transport;
 
 public interface TransportService {
-    void send(String address);
+    void sendContent(byte[] content, String address);
 }

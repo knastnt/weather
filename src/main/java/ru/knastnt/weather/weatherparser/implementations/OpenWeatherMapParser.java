@@ -1,11 +1,11 @@
-package ru.knastnt.weather.weatherparser;
+package ru.knastnt.weather.weatherparser.implementations;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import ru.knastnt.weather.weatherparser.dtos.WeatherDto;
 
 @Slf4j
-@Service
+@Component
 public class OpenWeatherMapParser implements WeatherParser {
     @Override
     public WeatherDto parseForCity(String city) {
