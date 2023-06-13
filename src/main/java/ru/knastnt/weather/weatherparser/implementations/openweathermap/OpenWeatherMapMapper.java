@@ -20,7 +20,7 @@ public class OpenWeatherMapMapper {
         res.setTemperature((int) Math.round(weather.getTemperature().getValue()));
         res.setTemperatureUnit(weather.getTemperature().getUnit());
         res.setCoordinates(weather.getLocation().getCoordinate().toString());
-        res.setZoneOffset(weather.getLocation().getZoneOffset().toString());
+        res.setZoneOffset(weather.getLocation().getZoneOffset().toString().replace("Z", ""));
         res.setWindDirection(WingDirectionConvertor.convert(weather.getWind().getDegrees().intValue()));
         res.setWindSpeed((int) Math.round(weather.getWind().getSpeed()));
         res.setWindGust((int) Math.round(weather.getWind().getGust()));
