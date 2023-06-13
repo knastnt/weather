@@ -7,9 +7,7 @@ import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import lombok.SneakyThrows;
 import net.sf.jasperreports.engine.*;
@@ -33,12 +31,12 @@ public class JasperPdfCreator {
         URL resource = JasperPdfCreator.class.getClassLoader().getResource("templates/weather.jrxml");
         String s = JasperCompileManager.compileReportToFile(resource.getFile());
 
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(Arrays.asList(
-                new ExampleData("WEATHER", "WEATHER норм"),
-                new ExampleData("baz", "qux")));
+//        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(Arrays.asList(
+//                new ExampleData("WEATHER", "WEATHER норм"),
+//                new ExampleData("baz", "qux")));
 
         InputStream resourceAsStream = JasperPdfCreator.class.getClassLoader().getResourceAsStream("templates/weather1.jasper");
-        JasperPrint jasperPrint = JasperFillManager.fillReport(resourceAsStream, parameters, dataSource);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(resourceAsStream, parameters, getDataSource());
 
         byte[] bytes = JasperExportManager.exportReportToPdf(jasperPrint);
         Files.write(Path.of("e:/example.pdf"), bytes);
@@ -54,6 +52,36 @@ public class JasperPdfCreator {
         exporter.exportReport();*/
 
         return null;
+    }
+
+    private static JRDataSource getDataSource() {
+        Collection<BeanWithList> coll = new ArrayList<BeanWithList>();
+        coll.add(new BeanWithList(Arrays.asList("London", "Paris"), 1));
+        coll.add(new BeanWithList(Arrays.asList("London", "Madrid", "Moscow"), 2));
+        coll.add(new BeanWithList(Arrays.asList("Rome"), 3));
+
+        return new JRBeanCollectionDataSource(coll);
+    }
+
+    public static class BeanWithList {
+
+        // The member's name can be any. The JR engine is using public getter for extracting field's value
+        private List<String> cities;
+        private Integer id;
+
+        public BeanWithList(List<String> cities, Integer id) {
+            this.cities = cities;
+            this.id = id;
+        }
+
+        // getter should be public
+        public List<String> getCities() {
+            return this.cities;
+        }
+
+        public Integer getId() {
+            return this.id;
+        }
     }
 }
 
