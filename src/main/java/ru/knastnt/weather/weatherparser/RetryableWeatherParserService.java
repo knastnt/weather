@@ -15,7 +15,7 @@ public class RetryableWeatherParserService implements WeatherParserService {
     private WeatherParser openWeatherMapParser;
 
     @Override
-    @Retryable
+    @Retryable(exclude = CityNotFoundException.class)
     public WeatherDto parseForCity(String city) {
         log.debug("Try to parse weather for city: \"{}\"", city);
         return openWeatherMapParser.parseForCity(city);
@@ -23,6 +23,7 @@ public class RetryableWeatherParserService implements WeatherParserService {
 
     @Recover
     WeatherDto logFailAndThrowEx(Exception e, String city) {
+        if (e instanceof CityNotFoundException) throw (CityNotFoundException) e;
         log.warn("Maximum number of attempts for parsing weather exceeded", e);
         throw new RuntimeException("Can't parse weather for city: \"" + city + "\"");
     }

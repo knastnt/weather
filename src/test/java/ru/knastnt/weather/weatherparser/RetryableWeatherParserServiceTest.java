@@ -19,6 +19,14 @@ class RetryableWeatherParserServiceTest extends WeatherApplicationTests {
     private WeatherParser weatherParser;
 
     @Test
+    void parseForCity_doNotRetry() {
+        Mockito.doThrow(new CityNotFoundException()).when(weatherParser).parseForCity(any());
+
+        assertThatThrownBy(() -> service.parseForCity("some city")).isInstanceOf(CityNotFoundException.class);
+        Mockito.verify(weatherParser, times(1)).parseForCity("some city");
+    }
+
+    @Test
     void parseForCity_attemptsExceeded() {
         Mockito.doThrow(new RuntimeException("synthetic ex")).when(weatherParser).parseForCity(any());
 

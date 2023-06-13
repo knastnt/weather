@@ -6,6 +6,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.knastnt.weather.controllers.dtos.GetWeatherResponseDto;
+import ru.knastnt.weather.weatherparser.CityNotFoundException;
 
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -23,6 +24,16 @@ public class AppExceptionHandler {
             GetWeatherResponseDto.builder()
                 .status(GetWeatherResponseDto.Status.ERROR)
                 .description(description)
+                .build()
+        );
+    }
+
+    @ExceptionHandler(CityNotFoundException.class)
+    public ResponseEntity<GetWeatherResponseDto> catchCityNotFoundException(CityNotFoundException e) {
+        return ResponseEntity.badRequest().body(
+            GetWeatherResponseDto.builder()
+                .status(GetWeatherResponseDto.Status.ERROR)
+                .description("City not found")
                 .build()
         );
     }
