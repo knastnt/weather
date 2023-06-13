@@ -149,40 +149,10 @@
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
-	<columnHeader>
-		<band height="20">
-			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="0cd4badf-420c-4299-824d-9e9422ca4771"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true" isItalic="true" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Id]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="100" y="0" width="100" height="20" uuid="780d55a8-571c-4d51-9a03-33440d5cf34b"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true" isItalic="true" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[City name]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="100" height="20" uuid="89c31a1c-883a-4430-b64e-6948df031494"/>
+				<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="100" height="20" uuid="89c31a1c-883a-4430-b64e-6948df031494"/>
 				<box leftPadding="10">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -213,13 +183,4 @@
 			</componentElement>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
