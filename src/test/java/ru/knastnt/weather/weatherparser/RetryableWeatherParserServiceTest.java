@@ -20,7 +20,7 @@ class RetryableWeatherParserServiceTest extends WeatherApplicationTests {
 
     @Test
     void parseForCity_attemptsExceeded() {
-        Mockito.when(weatherParser.parseForCity(any())).thenThrow(new RuntimeException("synthetic ex"));
+        Mockito.doThrow(new RuntimeException("synthetic ex")).when(weatherParser).parseForCity(any());
 
         assertThatThrownBy(() -> service.parseForCity("some city")).hasMessage("Can't parse weather for city: \"some city\"");
         Mockito.verify(weatherParser, times(3)).parseForCity("some city");
@@ -28,7 +28,7 @@ class RetryableWeatherParserServiceTest extends WeatherApplicationTests {
 
     @Test
     void parseForCity_attemptsSecondSuccess() {
-        Mockito.when(weatherParser.parseForCity(any())).thenThrow(new RuntimeException()).thenReturn(new WeatherDto());
+        Mockito.doThrow(new RuntimeException("synthetic ex")).doReturn(new WeatherDto()).when(weatherParser).parseForCity(any());
 
         WeatherDto result = service.parseForCity("some city");
         assertThat(result).isNotNull();
