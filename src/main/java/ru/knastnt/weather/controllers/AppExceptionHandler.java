@@ -1,5 +1,6 @@
 package ru.knastnt.weather.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,6 +12,7 @@ import ru.knastnt.weather.weatherparser.CityNotFoundException;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestControllerAdvice
 public class AppExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -40,6 +42,7 @@ public class AppExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<GetWeatherResponseDto> catchException(Exception e) {
+        log.error("Exception", e);
         return ResponseEntity.internalServerError().body(
                 GetWeatherResponseDto.builder()
                         .status(GetWeatherResponseDto.Status.ERROR)
