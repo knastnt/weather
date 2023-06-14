@@ -24,6 +24,7 @@ public class JasperPdfCreator {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("CITY", "city_город");
         parameters.put("COUNTRY", "страна_country");
+        parameters.put("ICON", "icons/01d.png");
 
         URL resource = JasperPdfCreator.class.getClassLoader().getResource("templates/weather.jrxml");
         String s = JasperCompileManager.compileReportToFile(resource.getFile());
