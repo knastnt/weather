@@ -19,6 +19,7 @@ class WeatherSupplyServiceImplTest extends WeatherApplicationTests {
 
         weatherSupplyService.sendWeatherDetails(getWeatherRequestDto);
 
+        System.out.println("DONE main thread");
         Thread.sleep(5000L);
     }
 }
