@@ -59,9 +59,9 @@ public class JasperPdfCreator {
 
     private static JRDataSource getDataSource() {
         Collection<BeanWithList> coll = new ArrayList<BeanWithList>();
-        coll.add(new BeanWithList(Arrays.asList(WUnit.of("London"), WUnit.of("Paris")), 1));
-        coll.add(new BeanWithList(Arrays.asList(WUnit.of("London"), WUnit.of("Madrid"), WUnit.of("Moscow"), WUnit.of("one"), WUnit.of("two"), WUnit.of("three"), WUnit.of("four"), WUnit.of("five"), WUnit.of("six")), 2));
-        coll.add(new BeanWithList(Arrays.asList(WUnit.of("Rome")), 3));
+        coll.add(new BeanWithList(Arrays.asList(WUnit.of("London"), WUnit.of("Paris")), "сегодня"));
+        coll.add(new BeanWithList(Arrays.asList(WUnit.of("London"), WUnit.of("Madrid"), WUnit.of("Moscow"), WUnit.of("one"), WUnit.of("two"), WUnit.of("three"), WUnit.of("four"), WUnit.of("five"), WUnit.of("six")), "завтра"));
+        coll.add(new BeanWithList(Arrays.asList(WUnit.of("Rome")), "послезавтра"));
 
         return new JRBeanCollectionDataSource(coll);
     }
@@ -70,7 +70,7 @@ public class JasperPdfCreator {
     @AllArgsConstructor
     public static class BeanWithList {
         private List<WUnit> cities;
-        private Integer id;
+        private String id;
     }
 
     @Data
