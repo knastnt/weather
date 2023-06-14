@@ -5,10 +5,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.knastnt.weather.WeatherApplicationTests;
-import ru.knastnt.weather.weatherparser.RetryableWeatherParserService;
 import ru.knastnt.weather.weatherparser.dtos.WeatherDto;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 class OpenWeatherMapParserTest extends WeatherApplicationTests {

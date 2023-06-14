@@ -11,6 +11,9 @@ import ru.knastnt.weather.transport.TransportService;
 import ru.knastnt.weather.weatherparser.WeatherParserService;
 import ru.knastnt.weather.weatherparser.dtos.WeatherDto;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 
