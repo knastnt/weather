@@ -16,7 +16,7 @@ class OpenWeatherMapParserTest extends WeatherApplicationTests {
     private OpenWeatherMapParser openWeatherMapParser;
     @Test
     @Disabled
-    void retryTest() {
+    void callOriginalApiTest() {
         WeatherDto weatherDto = openWeatherMapParser.parseForCity("комсомольск-на-амуре");
         log.info("{}", weatherDto);
     }

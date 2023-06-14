@@ -42,7 +42,9 @@ public class WeatherSupplyServiceImpl implements WeatherSupplyService {
                 successResult -> {
                     taskExecutor.submit(() -> transportService.sendContent(successResult, request.getEmail()));
                 },
-                ex -> { /*nothing to do. this exception was already logged*/ });
+                ex -> {
+                    log.error("FileContentFuture ends with exception", ex);
+                });
 
         log.debug("Weather document creation and sending submitted");
     }
