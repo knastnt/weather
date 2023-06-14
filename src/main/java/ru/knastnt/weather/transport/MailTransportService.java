@@ -63,6 +63,7 @@ public class MailTransportService implements TransportService {
 
         log.info("Sending email");
         mailSender.send(message);
+        log.info("Email sent");
     }
 
     @Recover
