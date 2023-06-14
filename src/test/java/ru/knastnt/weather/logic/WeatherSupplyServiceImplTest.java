@@ -1,5 +1,6 @@
 package ru.knastnt.weather.logic;
 
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.knastnt.weather.WeatherApplicationTests;
@@ -11,12 +12,13 @@ class WeatherSupplyServiceImplTest extends WeatherApplicationTests {
     @Autowired
     private WeatherSupplyService weatherSupplyService;
     @Test
+    @SneakyThrows
     void sendWeatherDetails() {
         GetWeatherRequestDto getWeatherRequestDto = new GetWeatherRequestDto();
         getWeatherRequestDto.setCity("комсомольск-на-амуре");
 
         weatherSupplyService.sendWeatherDetails(getWeatherRequestDto);
 
-        System.out.println();
+        Thread.sleep(5000L);
     }
 }

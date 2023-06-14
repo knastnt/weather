@@ -32,6 +32,7 @@ public class PdfDocumentCreationService implements DocumentCreationService {
             return JasperExportManager.exportReportToPdf(jasperPrint);
 
         } catch (Exception e) {
+            log.error("Exception in createWeatherDocument with {}", weather, e);
             if (e instanceof RuntimeException) throw (RuntimeException) e;
             throw new RuntimeException(e);
         }
