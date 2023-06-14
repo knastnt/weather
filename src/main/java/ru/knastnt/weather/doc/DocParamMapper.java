@@ -43,11 +43,11 @@ public class DocParamMapper {
     }
 
     private void set(String name, Object value, Map<String, Object> parameters) {
-        parameters.put(name, value == null ? "" : value);
+        parameters.put(name, value == null ? "" : String.valueOf(value));
     }
 
     public JRDataSource mapDataSource(WeatherDto weather) {
-        Collection<WUnitDateList> dates = new ArrayList<>();
+        List<WUnitDateList> dates = new ArrayList<>();
 
         Map<LocalDate, List<TimeWeatherDto>> dateWeatherTimes = weather.getTimeWeather().stream()
                 .collect(Collectors.groupingBy(timeWeatherDto -> timeWeatherDto.getTime().toLocalDate()));
@@ -55,6 +55,8 @@ public class DocParamMapper {
         for (Map.Entry<LocalDate, List<TimeWeatherDto>> dateListEntry : dateWeatherTimes.entrySet()) {
             dates.add(new WUnitDateList(mapTimeList(dateListEntry.getValue(), weather), dateListEntry.getKey().toString()));
         }
+
+        dates.sort(Comparator.comparing(WUnitDateList::getDate));
 
         return new JRBeanCollectionDataSource(dates);
     }
