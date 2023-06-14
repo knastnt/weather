@@ -8,7 +8,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.SneakyThrows;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -56,31 +59,31 @@ public class JasperPdfCreator {
 
     private static JRDataSource getDataSource() {
         Collection<BeanWithList> coll = new ArrayList<BeanWithList>();
-        coll.add(new BeanWithList(Arrays.asList("London", "Paris"), 1));
-        coll.add(new BeanWithList(Arrays.asList("London", "Madrid", "Moscow", "one", "two", "three", "four", "five", "six"), 2));
-        coll.add(new BeanWithList(Arrays.asList("Rome"), 3));
+        coll.add(new BeanWithList(Arrays.asList(WUnit.of("London"), WUnit.of("Paris")), 1));
+        coll.add(new BeanWithList(Arrays.asList(WUnit.of("London"), WUnit.of("Madrid"), WUnit.of("Moscow"), WUnit.of("one"), WUnit.of("two"), WUnit.of("three"), WUnit.of("four"), WUnit.of("five"), WUnit.of("six")), 2));
+        coll.add(new BeanWithList(Arrays.asList(WUnit.of("Rome")), 3));
 
         return new JRBeanCollectionDataSource(coll);
     }
 
+    @Data
+    @AllArgsConstructor
     public static class BeanWithList {
-
-        // The member's name can be any. The JR engine is using public getter for extracting field's value
-        private List<String> cities;
+        private List<WUnit> cities;
         private Integer id;
+    }
 
-        public BeanWithList(List<String> cities, Integer id) {
-            this.cities = cities;
-            this.id = id;
-        }
+    @Data
+    public static class WUnit {
+        private String f1;
+        private String f2;
 
-        // getter should be public
-        public List<String> getCities() {
-            return this.cities;
-        }
-
-        public Integer getId() {
-            return this.id;
+        private static AtomicInteger counter = new AtomicInteger(0);
+        public static WUnit of(String f1) {
+            WUnit res = new WUnit();
+            res.setF1(f1);
+            res.setF2("value" + counter.incrementAndGet());
+            return res;
         }
     }
 }
