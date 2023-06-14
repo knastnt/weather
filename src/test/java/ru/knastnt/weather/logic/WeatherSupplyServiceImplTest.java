@@ -11,9 +11,6 @@ import ru.knastnt.weather.transport.TransportService;
 import ru.knastnt.weather.weatherparser.WeatherParserService;
 import ru.knastnt.weather.weatherparser.dtos.WeatherDto;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 
@@ -36,13 +33,13 @@ class WeatherSupplyServiceImplTest extends WeatherApplicationTests {
 
         Mockito.doReturn(weatherDto).when(weatherParser).parseForCity(any());
         Mockito.doReturn(content).when(documentCreationService).createWeatherDocument(any());
-        Mockito.doNothing().when(transportService).sendContent(any(), any());
+        Mockito.doNothing().when(transportService).sendContent(any(), any(), any());
 
         weatherSupplyService.sendWeatherDetails(getWeatherRequestDto);
 
         Mockito.verify(weatherParser).parseForCity("комсомольск-на-амуре");
         Mockito.verify(documentCreationService, Mockito.timeout(500L)).createWeatherDocument(weatherDto);
-        Mockito.verify(transportService, Mockito.timeout(500L)).sendContent(content, "mail@ma.il");
+        Mockito.verify(transportService, Mockito.timeout(500L)).sendContent(content, "mail@ma.il", weatherDto.getCity());
     }
 
     @Test
@@ -54,13 +51,13 @@ class WeatherSupplyServiceImplTest extends WeatherApplicationTests {
 
         Mockito.doThrow(new RuntimeException("synthetic")).when(weatherParser).parseForCity(any());
         Mockito.doReturn(content).when(documentCreationService).createWeatherDocument(any());
-        Mockito.doNothing().when(transportService).sendContent(any(), any());
+        Mockito.doNothing().when(transportService).sendContent(any(), any(), any());
 
         assertThatThrownBy(() -> weatherSupplyService.sendWeatherDetails(getWeatherRequestDto)).hasMessage("Can't parse weather for city: \"комсомольск-на-амуре\"");
 
         Mockito.verify(weatherParser, Mockito.times(3)).parseForCity("комсомольск-на-амуре");
         Mockito.verify(documentCreationService, Mockito.timeout(500L).times(0)).createWeatherDocument(weatherDto);
-        Mockito.verify(transportService, Mockito.timeout(500L).times(0)).sendContent(content, "mail@ma.il");
+        Mockito.verify(transportService, Mockito.timeout(500L).times(0)).sendContent(content, "mail@ma.il", weatherDto.getCity());
     }
 
     @Test
@@ -72,13 +69,13 @@ class WeatherSupplyServiceImplTest extends WeatherApplicationTests {
 
         Mockito.doReturn(weatherDto).when(weatherParser).parseForCity(any());
         Mockito.doThrow(new RuntimeException("synthetic")).when(documentCreationService).createWeatherDocument(any());
-        Mockito.doNothing().when(transportService).sendContent(any(), any());
+        Mockito.doNothing().when(transportService).sendContent(any(), any(), any());
 
         weatherSupplyService.sendWeatherDetails(getWeatherRequestDto);
 
         Mockito.verify(weatherParser).parseForCity("комсомольск-на-амуре");
         Mockito.verify(documentCreationService, Mockito.timeout(500L)).createWeatherDocument(weatherDto);
-        Mockito.verify(transportService, Mockito.timeout(500L).times(0)).sendContent(content, "mail@ma.il");
+        Mockito.verify(transportService, Mockito.timeout(500L).times(0)).sendContent(content, "mail@ma.il", weatherDto.getCity());
     }
 
     @Test
@@ -90,12 +87,12 @@ class WeatherSupplyServiceImplTest extends WeatherApplicationTests {
 
         Mockito.doReturn(weatherDto).when(weatherParser).parseForCity(any());
         Mockito.doReturn(content).when(documentCreationService).createWeatherDocument(any());
-        Mockito.doThrow(new RuntimeException("synthetic")).when(transportService).sendContent(any(), any());
+        Mockito.doThrow(new RuntimeException("synthetic")).when(transportService).sendContent(any(), any(), any());
 
         weatherSupplyService.sendWeatherDetails(getWeatherRequestDto);
 
         Mockito.verify(weatherParser).parseForCity("комсомольск-на-амуре");
         Mockito.verify(documentCreationService, Mockito.timeout(500L)).createWeatherDocument(weatherDto);
-        Mockito.verify(transportService, Mockito.timeout(5000L).times(3)).sendContent(content, "mail@ma.il");
+        Mockito.verify(transportService, Mockito.timeout(5000L).times(3)).sendContent(content, "mail@ma.il", weatherDto.getCity());
     }
 }

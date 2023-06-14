@@ -40,7 +40,7 @@ public class WeatherSupplyServiceImpl implements WeatherSupplyService {
 
         fileContentFuture.addCallback(
                 successResult -> {
-                    taskExecutor.submit(() -> transportService.sendContent(successResult, request.getEmail()));
+                    taskExecutor.submit(() -> transportService.sendContent(successResult, request.getEmail(), weatherDto.getCity()));
                 },
                 ex -> {
                     log.error("FileContentFuture ends with exception", ex);

@@ -3,26 +3,18 @@ package ru.knastnt.weather.transport;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
-import ru.knastnt.weather.weatherparser.CityNotFoundException;
-import ru.knastnt.weather.weatherparser.dtos.WeatherDto;
 
-import javax.activation.DataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.mail.util.ByteArrayDataSource;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
+
+import static org.springframework.util.StringUtils.hasText;
 
 @Slf4j
 @Service
@@ -42,7 +34,7 @@ public class MailTransportService implements TransportService {
 
     @Override
     @Retryable
-    public void sendContent(byte[] content, String address) {
+    public void sendContent(byte[] content, String address, String city) {
         log.debug("Send content byte[{}] to email: \"{}\"", content.length, address);
 
         MimeMessage message = mailSender.createMimeMessage();
@@ -51,7 +43,7 @@ public class MailTransportService implements TransportService {
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true, ENCODING);
 
-            helper.setSubject(subject);
+            helper.setSubject(subject.replace("CITY_NAME", hasText(city) ? city : "").trim());
             helper.setText(body, false);
             helper.setFrom(from);
     //        helper.addAttachment(fileName, new ByteArrayResource(content));
@@ -67,7 +59,7 @@ public class MailTransportService implements TransportService {
     }
 
     @Recover
-    void logFailAndThrowEx(Exception e, byte[] content, String address) {
+    void logFailAndThrowEx(Exception e, byte[] content, String address, String city) {
         log.warn("Maximum number of attempts for sending email exceeded", e);
         throw new RuntimeException("Can't send email to: \"" + address + "\"");
     }
