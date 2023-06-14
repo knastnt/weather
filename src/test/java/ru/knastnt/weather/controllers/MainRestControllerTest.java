@@ -115,7 +115,7 @@ class MainRestControllerTest extends WeatherApplicationTests {
                     .andExpect(MockMvcResultMatchers.content().json(
                 "{" +
                             "   \"status\":\"SUCCESS\"," +
-                            "   \"description\":\"Document sent on 456kot@mail.ru\"" +
+                            "   \"description\":\"Document will send on 456kot@mail.ru\"" +
                             "}"
                     ));
 

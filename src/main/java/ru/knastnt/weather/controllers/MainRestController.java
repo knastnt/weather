@@ -20,7 +20,7 @@ public class MainRestController {
         service.sendWeatherDetails(request);
         return GetWeatherResponseDto.builder()
                 .status(GetWeatherResponseDto.Status.SUCCESS)
-                .description("Document sent on " + request.getEmail())
+                .description("Document will send on " + request.getEmail())
                 .build();
     }
 }
