@@ -2,7 +2,7 @@ package ru.knastnt.weather.utils;
 
 import ru.knastnt.weather.weatherparser.dtos.WindDirection;
 
-public class WingDirectionConvertor {
+public class WindDirectionConvertor {
     public static WindDirection convert(Integer degree) {
         final int divisor = 360 / WindDirection.values().length;
         final int coci = degree / divisor;

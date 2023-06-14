@@ -1,6 +1,8 @@
 package ru.knastnt.weather.weatherparser.dtos;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 @AllArgsConstructor
 public enum WindDirection {
     NORTH ("Северный"),
@@ -12,5 +14,6 @@ public enum WindDirection {
     WEST ("Западный"),
     NORTH_WEST ("Северо-западный");
 
+    @Getter
     private String description;
 }

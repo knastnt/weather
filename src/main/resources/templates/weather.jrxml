@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="weather1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a5cabdc6-e333-460f-a2be-42a06fcd7272">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="weather" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a5cabdc6-e333-460f-a2be-42a06fcd7272">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NO_DATA_ADAPTER"/>
 	<subDataset name="Dataset1" uuid="0185a757-cbc8-429b-842f-332cdfb24e28">
 		<field name="time" class="java.lang.String">
@@ -12,6 +12,9 @@
 		<field name="temperature" class="java.lang.Integer">
 			<fieldDescription><![CDATA[temperature]]></fieldDescription>
 		</field>
+		<field name="temperatureUnit" class="java.lang.String">
+			<fieldDescription><![CDATA[temperatureUnit]]></fieldDescription>
+		</field>
 		<field name="weather" class="java.lang.String">
 			<fieldDescription><![CDATA[weather]]></fieldDescription>
 		</field>
@@ -20,6 +23,9 @@
 		</field>
 		<field name="windSpeed" class="java.lang.Integer">
 			<fieldDescription><![CDATA[windSpeed]]></fieldDescription>
+		</field>
+		<field name="windUnit" class="java.lang.String">
+			<fieldDescription><![CDATA[windUnit]]></fieldDescription>
 		</field>
 	</subDataset>
 	<parameter name="CITY" class="java.lang.String"/>
@@ -211,7 +217,7 @@
 								<rightPen lineWidth="0.5" lineColor="#D1D1D1"/>
 							</box>
 							<textElement verticalAlignment="Middle"/>
-							<textFieldExpression><![CDATA[$F{temperature} + " " + $P{TEMPERATURE_UNIT}]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$F{temperature} + " " + $F{temperatureUnit}]]></textFieldExpression>
 						</textField>
 						<textField>
 							<reportElement x="120" y="0" width="150" height="20" uuid="4af5d947-9730-4ca1-9cf4-8bb7f6536de7"/>
@@ -244,7 +250,7 @@
 								<rightPen lineWidth="0.5" lineColor="#D1D1D1"/>
 							</box>
 							<textElement verticalAlignment="Middle"/>
-							<textFieldExpression><![CDATA[$F{windSpeed} + " " + $P{WIND_UNIT}]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$F{windSpeed} + " " + $F{windUnit}]]></textFieldExpression>
 						</textField>
 					</jr:listContents>
 				</jr:list>

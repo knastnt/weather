@@ -4,7 +4,7 @@ import com.github.prominence.openweathermap.api.model.forecast.Forecast;
 import com.github.prominence.openweathermap.api.model.forecast.WeatherForecast;
 import com.github.prominence.openweathermap.api.model.weather.Weather;
 import org.springframework.stereotype.Component;
-import ru.knastnt.weather.utils.WingDirectionConvertor;
+import ru.knastnt.weather.utils.WindDirectionConvertor;
 import ru.knastnt.weather.weatherparser.dtos.TimeWeatherDto;
 import ru.knastnt.weather.weatherparser.dtos.WeatherDto;
 
@@ -21,7 +21,7 @@ public class OpenWeatherMapMapper {
         res.setTemperatureUnit(weather.getTemperature().getUnit());
         res.setCoordinates(weather.getLocation().getCoordinate().toString());
         res.setZoneOffset(weather.getLocation().getZoneOffset().toString().replace("Z", ""));
-        res.setWindDirection(WingDirectionConvertor.convert(weather.getWind().getDegrees().intValue()));
+        res.setWindDirection(WindDirectionConvertor.convert(weather.getWind().getDegrees().intValue()));
         res.setWindSpeed((int) Math.round(weather.getWind().getSpeed()));
         res.setWindGust((int) Math.round(weather.getWind().getGust()));
         res.setWindUnit(weather.getWind().getUnit().replace("meter/sec", "м/с"));
@@ -33,7 +33,7 @@ public class OpenWeatherMapMapper {
             timeWeatherDto.setWeather(f.getWeatherState().getDescription());
             timeWeatherDto.setIconName(f.getWeatherState().getIconId());
             timeWeatherDto.setTemperature((int) Math.round(f.getTemperature().getValue()));
-            timeWeatherDto.setWindDirection(WingDirectionConvertor.convert(f.getWind().getDegrees().intValue()));
+            timeWeatherDto.setWindDirection(WindDirectionConvertor.convert(f.getWind().getDegrees().intValue()));
             timeWeatherDto.setWindSpeed((int) Math.round(f.getWind().getSpeed()));
 
             res.getTimeWeather().add(timeWeatherDto);
