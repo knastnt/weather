@@ -93,7 +93,7 @@
 				<textElement>
 					<font size="30"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{TEMPERATURE} + $P{TEMPERATURE_UNIT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{TEMPERATURE} + " " + $P{TEMPERATURE_UNIT}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="110" y="0" width="100" height="20" forecolor="#FFFFFF" uuid="6c374aff-253f-41fa-8ea1-ece72605a7f4"/>
@@ -211,7 +211,7 @@
 								<rightPen lineWidth="0.5" lineColor="#D1D1D1"/>
 							</box>
 							<textElement verticalAlignment="Middle"/>
-							<textFieldExpression><![CDATA[$F{temperature}]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$F{temperature} + " " + $P{TEMPERATURE_UNIT}]]></textFieldExpression>
 						</textField>
 						<textField>
 							<reportElement x="120" y="0" width="150" height="20" uuid="4af5d947-9730-4ca1-9cf4-8bb7f6536de7"/>
@@ -244,7 +244,7 @@
 								<rightPen lineWidth="0.5" lineColor="#D1D1D1"/>
 							</box>
 							<textElement verticalAlignment="Middle"/>
-							<textFieldExpression><![CDATA[$F{windSpeed}]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$F{windSpeed} + " " + $P{WIND_UNIT}]]></textFieldExpression>
 						</textField>
 					</jr:listContents>
 				</jr:list>
