@@ -5,12 +5,14 @@ import lombok.Data;
 import lombok.SneakyThrows;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import ru.knastnt.weather.weatherparser.dtos.WindDirection;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -37,32 +39,34 @@ public class JasperPdfCreator {
     }
 
     private static JRDataSource getDataSource() {
-        Collection<BeanWithList> coll = new ArrayList<BeanWithList>();
-        coll.add(new BeanWithList(Arrays.asList(WUnit.of("London"), WUnit.of("Paris")), "сегодня"));
-        coll.add(new BeanWithList(Arrays.asList(WUnit.of("London"), WUnit.of("Madrid"), WUnit.of("Moscow"), WUnit.of("one"), WUnit.of("two"), WUnit.of("three"), WUnit.of("four"), WUnit.of("five"), WUnit.of("six")), "завтра"));
-        coll.add(new BeanWithList(Arrays.asList(WUnit.of("Rome")), "послезавтра"));
+        Collection<WUnitDateList> dates = new ArrayList<>();
+        dates.add(new WUnitDateList(Arrays.asList(
+                new WUnit("10:45", "icons/02d.png", 25, "солнечно", "западный", 1),
+                new WUnit("15:00", "icons/04d.png", 23, "солнечно", "северо-западный", 2)
+        ), "сегодня"));
+        dates.add(new WUnitDateList(Arrays.asList(
+                new WUnit("08:00", "icons/01d.png", 25, "солнечно", null, 0),
+                new WUnit("16:00", "icons/02d.png", 27, "солнечно", "западный", 1)
+        ), "завтра"));
 
-        return new JRBeanCollectionDataSource(coll);
+        return new JRBeanCollectionDataSource(dates);
     }
 
     @Data
     @AllArgsConstructor
-    public static class BeanWithList {
-        private List<WUnit> cities;
-        private String id;
+    public static class WUnitDateList {
+        private List<WUnit> wunits;
+        private String date;
     }
 
     @Data
+    @AllArgsConstructor
     public static class WUnit {
-        private String f1;
-        private String f2;
-
-        private static AtomicInteger counter = new AtomicInteger(0);
-        public static WUnit of(String f1) {
-            WUnit res = new WUnit();
-            res.setF1(f1);
-            res.setF2("value" + counter.incrementAndGet());
-            return res;
-        }
+        private String time;
+        private String icon;
+        private Integer temperature;
+        private String weather;
+        private String windDirection;
+        private Integer windSpeed;
     }
 }
