@@ -13,9 +13,11 @@ import ru.knastnt.weather.weatherparser.dtos.TimeWeatherDto;
 import ru.knastnt.weather.weatherparser.dtos.WeatherDto;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 
+import static java.util.Optional.ofNullable;
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.knastnt.weather.weatherparser.dtos.WindDirection.EAST;
 import static ru.knastnt.weather.weatherparser.dtos.WindDirection.NORTH_WEST;
@@ -83,7 +85,11 @@ class OpenWeatherMapMapperTest {
         assertThat(res.getTimeWeather()).hasSize(1);
 
         TimeWeatherDto twd = res.getTimeWeather().get(0);
-        assertThat(twd.getTime()).isEqualTo(LocalDateTime.of(2023,6,14,0,29,30));
+        assertThat(twd.getTime()).isEqualTo(
+                LocalDateTime.of(2023,6,14,0,29,30)
+                .atZone(ZoneId.systemDefault())
+                .withZoneSameInstant(ZoneOffset.UTC)
+                .toLocalDateTime());
         assertThat(twd.getWeather()).isEqualTo("wsdsc2");
         assertThat(twd.getIconName()).isEqualTo("swic2");
         assertThat(twd.getTemperature()).isEqualTo(22);

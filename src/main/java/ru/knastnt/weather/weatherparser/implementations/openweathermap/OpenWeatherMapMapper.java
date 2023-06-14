@@ -13,6 +13,7 @@ import ru.knastnt.weather.utils.WindDirectionConvertor;
 import ru.knastnt.weather.weatherparser.dtos.TimeWeatherDto;
 import ru.knastnt.weather.weatherparser.dtos.WeatherDto;
 
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 
 import static java.util.Optional.ofNullable;
@@ -38,7 +39,10 @@ public class OpenWeatherMapMapper {
         for (WeatherForecast f : forecast.getWeatherForecasts()) {
             TimeWeatherDto timeWeatherDto = new TimeWeatherDto();
 
-            timeWeatherDto.setTime(f.getForecastTime());
+            timeWeatherDto.setTime(f.getForecastTime()
+                    .atZone(ZoneId.systemDefault())
+                    .withZoneSameInstant(ofNullable(forecast.getLocation()).map(com.github.prominence.openweathermap.api.model.forecast.Location::getZoneOffset).orElse(ZoneOffset.UTC))
+                    .toLocalDateTime());
             timeWeatherDto.setWeather(ofNullable(f.getWeatherState()).map(WeatherState::getDescription).orElse(null));
             timeWeatherDto.setIconName(ofNullable(f.getWeatherState()).map(WeatherState::getIconId).orElse(null));
             timeWeatherDto.setTemperature(ofNullable(f.getTemperature()).map(Temperature::getValue).map(Math::round).map(Long::intValue).orElse(null));
