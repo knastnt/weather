@@ -6,10 +6,10 @@ import lombok.Data;
 public class WUnit {
     private String time;
     private String icon;
-    private Integer temperature;
+    private String temperature;
     private String temperatureUnit;
     private String weather;
     private String windDirection;
-    private int windSpeed;
+    private String windSpeed;
     private String windUnit;
 }

@@ -1,4 +1,4 @@
-package ru.knastnt.weather.doc.util;
+package ru.knastnt.weather.doc.additions;
 
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.JasperCompileManager;

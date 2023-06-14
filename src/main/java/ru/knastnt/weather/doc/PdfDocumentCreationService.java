@@ -4,7 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.knastnt.weather.doc.util.ReportService;
+import ru.knastnt.weather.doc.additions.DocParamMapper;
+import ru.knastnt.weather.doc.additions.ReportService;
 import ru.knastnt.weather.weatherparser.dtos.WeatherDto;
 
 import java.util.Map;

@@ -1,4 +1,4 @@
-package ru.knastnt.weather.doc.util;
+package ru.knastnt.weather.doc.additions;
 
 import net.sf.jasperreports.engine.JasperReport;
 import org.junit.jupiter.api.Test;

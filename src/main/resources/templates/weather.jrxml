@@ -9,7 +9,7 @@
 		<field name="icon" class="java.lang.String">
 			<fieldDescription><![CDATA[icon]]></fieldDescription>
 		</field>
-		<field name="temperature" class="java.lang.Integer">
+		<field name="temperature" class="java.lang.String">
 			<fieldDescription><![CDATA[temperature]]></fieldDescription>
 		</field>
 		<field name="temperatureUnit" class="java.lang.String">
@@ -21,7 +21,7 @@
 		<field name="windDirection" class="java.lang.String">
 			<fieldDescription><![CDATA[windDirection]]></fieldDescription>
 		</field>
-		<field name="windSpeed" class="java.lang.Integer">
+		<field name="windSpeed" class="java.lang.String">
 			<fieldDescription><![CDATA[windSpeed]]></fieldDescription>
 		</field>
 		<field name="windUnit" class="java.lang.String">
